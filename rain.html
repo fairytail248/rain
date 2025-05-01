@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rain and Thunder Effect</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    background: #000;
+    background-image: url(WhatsApp\ Image\ 2024-12-06\ at\ 09.48.29_58d219cd.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  .rain {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .drop {
+    background: rgba(255, 255, 255, 0.6);
+    width: 1px;
+    height: 89px;
+    position: absolute;
+    bottom: 100%;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  .thunder {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0x;
+    height: 0;
+      border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 100px solid #bacacf;
+    
+    background: #fff;
+    transform: translate(-50%, -50%);
+    animation: flash 0.2s ease-in-out;
+  }
+
+  .thunder:after{
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -50px;
+    width: 0;
+    height: 0;
+     border-left: 2px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 100px solid #bacacf;
+  }
+  @keyframes flash {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="rain" id="rain"></div>
+
+<script>
+  function createRain() {
+    const drop = document.createElement('div');
+    drop.classList.add('drop');
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.animationDuration = Math.random() * 2 + 1 + 's';
+    drop.style.animationDelay = Math.random() * -20 + 's';
+    document.getElementById('rain').appendChild(drop);
+  }
+
+  function createThunder() {
+    const thunder = document.createElement('div');
+    thunder.classList.add('thunder');
+    document.body.appendChild(thunder);
+    setTimeout(() => {
+      thunder.style.display = 'block';
+
+    
+    }, Math.random() * 10000);
+    setTimeout(() => {
+      thunder.remove();
+    }, Math.random() * 10000 + 200);
+  }
+
+  setInterval(createRain, 100);
+  setInterval(createThunder, 10000);
+</script>
+</body>
+</html>
